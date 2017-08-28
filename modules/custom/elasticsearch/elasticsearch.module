@@ -1,0 +1,40 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+use Drupal\node\NodeInterface;
+use Drupal\elasticsearch\Elasticsearch;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for node entities.
+ *
+ * This tests saving a node on node insert.
+ *
+ * @see \Drupal\node\Tests\NodeSaveTest::testNodeSaveOnInsert()
+ */
+function elasticsearch_node_insert(NodeInterface $node) {  
+  
+  $status = $node->isPublished();
+  if ($status) {
+     $elasticsearch = new Elasticsearch();
+     $elasticsearch->es_node_save($node);
+  }
+}
+
+function elasticsearch_node_update(NodeInterface $node) {
+
+  $status = $node->isPublished(); 
+  if ($status) {
+     $elasticsearch = new Elasticsearch();
+     $elasticsearch->es_node_save($node);
+  }
+}
+
+function elasticsearch_node_delete(NodeInterface $node) {
+  $elasticsearch = new Elasticsearch();
+  $elasticsearch->es_node_delete($node);
+}

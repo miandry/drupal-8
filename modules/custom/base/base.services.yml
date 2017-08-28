@@ -1,0 +1,6 @@
+services:
+  base.twig.base_extension:
+    arguments: ['@renderer']
+    class: Drupal\base\TwigExtension\BaseExtension
+    tags:
+      - { name: twig.extension }

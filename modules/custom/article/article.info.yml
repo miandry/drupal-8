@@ -1,0 +1,5 @@
+name :  'Article Module Custom'
+version: '8.x-1.x-dev'
+core: '8.x'
+type: module
+description: 'Article  module  '

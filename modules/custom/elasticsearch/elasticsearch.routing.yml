@@ -1,0 +1,13 @@
+elasticsearch.config:
+
+  path: '/admin/config/elasticsearch'
+
+  defaults:
+
+    _form: '\Drupal\elasticsearch\Form\ElasticsearchConfigForm'
+
+    _title: 'Elasticsearch Configuration'
+
+  requirements:
+
+    _permission: 'administer site configuration'

@@ -1,0 +1,89 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+use Drupal\node\NodeInterface;
+use Drupal\core\Cache\Cache;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function article_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id === 'node_article_edit_form' || $form_id === 'node_article_form') {
+  //  $form['#attached']['library'][] = 'article/customize_editor_form';
+  }
+}
+/**
+ * Implements hook_theme().
+ */
+function article_theme($existing, $type, $theme, $path) {
+  return array(
+    'slider_home' => array(
+      'variables' => array(
+        'items' => array(),
+      )
+    )
+  );
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ */
+function article_preprocess_node(&$variables) {
+  /** @var Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+//  if ($node->getType() == 'article') {
+//    switch ($variables['view_mode']) {
+//      case "trending_articles":
+//        $variables['node_counter']= \Drupal::service('statistics.storage.node')->fetchView($node->id()) ;
+//        break;
+//    }
+//  }
+}
+
+function article_node_insert(NodeInterface $node) {
+  if ($node->getType() == 'article') {
+ //   if($node->get('field_push_to_home')->getValue()) {
+      Cache::invalidateTags(
+        [
+          'config:block.block.sliderhomeblock',
+        ]
+      );
+  //  }
+  }
+}
+
+function article_node_update(NodeInterface $node) {
+  if ($node->getType() == 'article') {
+   // if($node->get('field_push_to_home')->getValue()) {
+      Cache::invalidateTags(
+        [
+          'config:block.block.sliderhomeblock',
+        ]
+      );
+   // }
+  }
+}
+
+function article_node_delete(NodeInterface $node) {
+  if ($node->getType() == 'article') {
+   // if($node->get('field_push_to_home')->getValue()) {
+      Cache::invalidateTags(
+        [
+          'config:block.block.sliderhomeblock',
+        ]
+      );
+    //}
+  }
+}

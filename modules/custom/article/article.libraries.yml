@@ -1,0 +1,3 @@
+customize_editor_form:
+  js:
+    js/article.js: {}

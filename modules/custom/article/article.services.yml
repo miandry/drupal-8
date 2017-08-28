@@ -1,0 +1,6 @@
+services:
+  article.twig.article_extension:
+    arguments: ['@renderer']
+    class: Drupal\article\TwigExtension\TwigArticleExtension
+    tags:
+      - { name: twig.extension }

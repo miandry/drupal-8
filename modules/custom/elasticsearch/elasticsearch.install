@@ -1,0 +1,49 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Implements hook_schema().
+ *
+ * @see hook_schema()
+ */
+function elasticsearch_schema() {
+      $schema['elasticsearch'] = array(
+        'description' => 'The table for storing mapping id elasticsearch',
+        'fields' => array(
+            'nid' => array(
+                'description' => 'The  identifier for drupal nid .',
+                'type' => 'serial',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+            ),
+           '_id' => array(
+                'description' => 'The primary identifier for elasticsearch _id.',
+                'type' => 'varchar',
+                'length' => '50',
+                'not null' => TRUE,
+           
+            ),
+           'type' => array(
+                'description' => 'Node type',
+                'type' => 'varchar',
+                'length' => '10',
+                'not null' => TRUE,
+           
+            ),
+        ),
+        'primary key' => array('nid'),
+    );
+    return $schema;
+}
+/**
+ * Implementation of hook_uninstall().
+ */
+function elasticsearch_uninstall() {
+ // Remove tables.
+     \Drupal::database()->schema()->dropTable('elasticsearch');
+}
